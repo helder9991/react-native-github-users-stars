@@ -72,7 +72,7 @@ export default class Main extends Component {
                 newUser: '',
             });
         } catch (err) {
-            Alert.alert('Erro', `This user doesn't exists`, [{ text: 'Ok' }], {
+            Alert.alert('Error', `This user doesn't exists`, [{ text: 'Ok' }], {
                 cancelable: false,
             });
         }
