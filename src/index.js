@@ -1,15 +1,17 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { StatusBar } from 'react-native';
 
-// Importação do Reactotron
+// Reactotron import
 import './config/ReactotronConfig';
 
-// import { Container } from './styles';
+// Routes import
+import Routes from './routes';
 
 export default function App() {
     return (
-        <View>
-            <Text>Olá</Text>
-        </View>
+        <>
+            <StatusBar barStyle="light-content" backgroundColor="#7159c1" />
+            <Routes />
+        </>
     );
 }
