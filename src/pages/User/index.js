@@ -32,6 +32,7 @@ export default class User extends Component {
         stars: [],
         loading: true,
         page: 2,
+        refreshing: false,
     };
 
     async componentDidMount() {
@@ -63,6 +64,23 @@ export default class User extends Component {
     handleNavigate = repository => {
         const { navigation } = this.props;
         navigation.navigate('Web', { repository });
+    };
+
+    refreshList = async () => {
+        this.setState({ refreshing: true });
+
+        const { navigation } = this.props;
+        const user = navigation.getParam('user');
+
+        const response = await api.get(`/users/${user.login}/starred`);
+
+        if (response)
+            this.setState({
+                stars: response.data,
+                page: 2,
+            });
+
+        this.setState({ refreshing: false });
     };
 
     render() {
@@ -97,6 +115,8 @@ export default class User extends Component {
                             )}
                             onEndReached={this.handleList}
                             onEndReachedThreshold={0.25}
+                            onRefresh={this.refreshList}
+                            refreshing={this.state.refreshing}
                         />
                     </>
                 )}
